@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+                                   http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>br.edu.ifpr</groupId>
+   <artifactId>tempconv</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+   <packaging>war</packaging>
+
+   <name>${project.artifactId}</name>
+
+   <properties>
+      <maven.test.skip>true</maven.test.skip>
+
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <maven.compiler.source>17</maven.compiler.source>
+      <maven.compiler.target>17</maven.compiler.target>
+
+      <servlet-api.version>6.0.0</servlet-api.version>
+
+      <jersey.version>3.1.2</jersey.version>
+
+      <jackson.core.version>2.15.2</jackson.core.version>
+      <jackson.databind.version>2.15.2</jackson.databind.version>
+      <jackson.dataformat.xml.version>2.15.2</jackson.dataformat.xml.version>
+      <jackson.annotations.version>2.15.2</jackson.annotations.version>
+
+      <!-- build > pluginManagement > plugins -->
+      <maven.clean.plugin.version>3.2.0</maven.clean.plugin.version>
+      <maven.resources.plugin.version>3.3.1</maven.resources.plugin.version>
+      <maven.compiler.plugin.version>3.11.0</maven.compiler.plugin.version>
+      <maven.surefire.plugin.version>3.1.2</maven.surefire.plugin.version>
+      <maven.war.plugin.version>3.3.2</maven.war.plugin.version>
+      <maven.install.plugin.version>3.1.1</maven.install.plugin.version>
+      <maven.deploy.plugin.version>3.1.1</maven.deploy.plugin.version>
+   </properties>
+
+   <dependencyManagement>
+      <dependencies>
+         <!-- https://mvnrepository.com/artifact/org.glassfish.jersey/jersey-bom -->
+         <dependency>
+            <groupId>org.glassfish.jersey</groupId>
+            <artifactId>jersey-bom</artifactId>
+            <version>${jersey.version}</version>
+            <type>pom</type>
+            <scope>import</scope>
+         </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+   <dependencies>
+      <!-- https://mvnrepository.com/artifact/jakarta.servlet/jakarta.servlet-api -->
+      <dependency>
+          <groupId>jakarta.servlet</groupId>
+          <artifactId>jakarta.servlet-api</artifactId>
+          <version>${servlet-api.version}</version>
+          <scope>provided</scope>
+      </dependency>
+ 
+      <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
+      <dependency>
+         <groupId>org.glassfish.jersey.containers</groupId>
+         <artifactId>jersey-container-servlet</artifactId>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.inject/jersey-hk2 -->
+      <dependency>
+         <groupId>org.glassfish.jersey.inject</groupId>
+         <artifactId>jersey-hk2</artifactId>
+      </dependency>
+
+      <!-- https://mvnrepository.com/artifact/org.glassfish.jersey.media/jersey-media-json-jackson -->
+      <dependency>
+         <groupId>org.glassfish.jersey.media</groupId>
+         <artifactId>jersey-media-json-jackson</artifactId>
+      </dependency>
+
+      <!-- JACKSON CORE -->
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
+      <dependency>
+         <groupId>com.fasterxml.jackson.core</groupId>
+         <artifactId>jackson-core</artifactId>
+         <version>${jackson.core.version}</version>
+      </dependency>
+
+      <!-- JACKSON DATABIND -->
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-databind -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+          <version>${jackson.databind.version}</version>
+      </dependency>
+
+      <!-- JACKSON DATAFORMAT XML -->
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.dataformat</groupId>
+          <artifactId>jackson-dataformat-xml</artifactId>
+          <version>${jackson.dataformat.xml.version}</version>
+      </dependency>
+
+      <!-- JACKSON ANNOTATIONS -->
+      <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-annotations -->
+      <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-annotations</artifactId>
+          <version>${jackson.annotations.version}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>junit</groupId>
+         <artifactId>junit</artifactId>
+         <version>4.11</version>
+         <scope>test</scope>
+      </dependency>
+   </dependencies>
+
+   <build>
+      <finalName>${project.artifactId}</finalName>
+
+      <pluginManagement>
+         <plugins>
+            <!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugin>
+               <artifactId>maven-clean-plugin</artifactId>
+               <version>${maven.clean.plugin.version}</version>
+            </plugin>
+            <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+            <plugin>
+               <artifactId>maven-resources-plugin</artifactId>
+               <version>${maven.resources.plugin.version}</version>
+            </plugin>
+            <plugin>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>${maven.compiler.plugin.version}</version>
+            </plugin>
+            <plugin>
+               <artifactId>maven-surefire-plugin</artifactId>
+               <version>${maven.surefire.plugin.version}</version>
+            </plugin>
+            <plugin>
+               <artifactId>maven-war-plugin</artifactId>
+               <version>${maven.war.plugin.version}</version>
+            </plugin>
+            <plugin>
+               <artifactId>maven-install-plugin</artifactId>
+               <version>${maven.install.plugin.version}</version>
+            </plugin>
+            <plugin>
+               <artifactId>maven-deploy-plugin</artifactId>
+               <version>${maven.deploy.plugin.version}</version>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
+</project>
