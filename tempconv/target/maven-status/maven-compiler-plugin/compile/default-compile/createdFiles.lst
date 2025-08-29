@@ -1,4 +1,0 @@
-br\edu\ifpr\tempconv\restful\config\AppConfig.class
-br\edu\ifpr\tempconv\restful\TemperatureConverterPPResource.class
-br\edu\ifpr\tempconv\restful\TemperatureConverterQPResource.class
-br\edu\ifpr\tempconv\utils\TemperatureConverter.class

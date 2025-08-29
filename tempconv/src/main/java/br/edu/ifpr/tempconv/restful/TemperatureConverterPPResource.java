@@ -4,14 +4,26 @@ import br.edu.ifpr.tempconv.utils.TemperatureConverter;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("converterpp")
 public class TemperatureConverterPPResource {
-	@GET @Path("c2fpp/{tempi}")
-	public Response c2fpp(@PathParam("tempi") Double tempi) {
+	@GET @Path("c2fpp/{tempi:[-+]?\\d*([.,]\\d+)?}")
+	
+	public Response c2fpp(@PathParam("tempi") String temperature) {
+		String str = temperature.replace(',','.');
+		
+		Double tempi = Double.valueOf(str);
 		Double tempo = TemperatureConverter.celsius2Fahrenheit(tempi);
-		return Response.ok().entity(tempo).build();
+		Temperature  temp = new Temperature(tempi, TemperatureTypes.CELSIUS,
+											tempo, TemperatureTypes.FAHRENHEIT);
+					
+		return Response.ok()
+						.entity(temp.toString())
+						.header("Content-Type",MediaType.TEXT_PLAIN + 
+											   ";charset=utf-8")
+						.build();
 	}
 	
 	@GET @Path("c2kpp/{tempi}")
