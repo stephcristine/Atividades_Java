@@ -1,8 +1,10 @@
 package br.edu.ifpr.tempconv.utils;
 
+import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
+
 public final class TemperatureConverter {
-	public static Double celsius2Fahrenheit(Double celsius) {
-		return celsius * 1.8 + 32.;
+	public static Double celsius2Fahrenheit(Double ti) {
+		return ti * 1.8 + 32.;
 	}
 	
 	public static Double celsius2Kelvin(Double celsius) {
@@ -23,5 +25,49 @@ public final class TemperatureConverter {
 	
 	public static Double kelvin2Fahrenheit(Double kelvin) {
 		return (kelvin - 273.) * 1.8 + 32.;
+	}
+	
+	public static Double calculateTempOutput(TemperatureTypes ti, Double tiv, TemperatureTypes to) {
+		Double result = 0.0;
+		
+		switch (ti) {
+			case CELSIUS: 
+				switch (to) {
+					case CELSIUS:
+						result = tiv;
+						break;
+					case FAHRENHEIT: 
+						result = celsius2Fahrenheit(tiv);
+						break;
+					case KELVIN:
+						result = celsius2Kelvin(tiv);
+						break;
+				}
+			case FAHRENHEIT:
+				switch (to) {
+					case CELSIUS:
+						result = fahrenheit2Celsius(tiv);
+						break;
+					case FAHRENHEIT: 
+						result = tiv;
+						break;
+					case KELVIN:
+						result = fahrenheit2Kelvin(tiv);
+						break;
+				}
+			case KELVIN:
+				switch (to) {
+					case CELSIUS:
+						result = kelvin2Celsius(tiv);
+						break;
+					case FAHRENHEIT: 
+						result = kelvin2Fahrenheit(tiv);
+						break;
+					case KELVIN:
+						result = tiv;
+						break;
+				}
+		}
+		return result;
 	}
 }

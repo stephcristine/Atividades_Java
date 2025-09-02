@@ -1,5 +1,7 @@
 package br.edu.ifpr.tempconv.restful;
 
+import br.edu.ifpr.tempconv.model.Temperature;
+import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
 import br.edu.ifpr.tempconv.utils.TemperatureConverter;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
