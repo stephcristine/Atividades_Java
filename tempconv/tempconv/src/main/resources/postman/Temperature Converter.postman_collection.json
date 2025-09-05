@@ -1,0 +1,487 @@
+{
+	"info": {
+		"_postman_id": "619d85a1-f076-496f-8ea0-0c86d250686a",
+		"name": "Temperature Converter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "787611",
+		"_collection_link": "https://restful-ex05.postman.co/workspace/TADS-Web-Services~03f0044b-7ac7-4789-a05d-67c8e314e2b4/collection/787611-619d85a1-f076-496f-8ea0-0c86d250686a?action=share&source=collection_link&creator=787611"
+	},
+	"item": [
+		{
+			"name": "PathParam C2F",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/c2fpp/27.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"c2fpp",
+						"27.3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam C2K",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/c2kpp/127.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"c2kpp",
+						"127.3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam F2C",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/f2cpp/81.14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"f2cpp",
+						"81.14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam F2K",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/f2kpp/381.14",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"f2kpp",
+						"381.14"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam K2C",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/k2cpp/17.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"k2cpp",
+						"17.3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam K2F",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/k2fpp/17.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"k2fpp",
+						"17.3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam C2F",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/c2fqp?ti=17.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"c2fqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "17.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam C2K",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/c2kqp?ti=117.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"c2kqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "117.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam F2C",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/f2cqp?ti=117.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"f2cqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "117.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam F2K",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/f2kqp?ti=117.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"f2kqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "117.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam K2C",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/k2cqp?ti=117.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"k2cqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "117.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam K2F",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/k2fqp?ti=117.3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"k2fqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "117.3"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam Enum",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterpp/c2fpp/FAHRENHEIT/81.14/CELSIUS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterpp",
+						"c2fpp",
+						"FAHRENHEIT",
+						"81.14",
+						"CELSIUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam Enum",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converterqp/c2fqp2?ti=CELSIUS&tiv=27.3&to=FAHRENHEIT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converterqp",
+						"c2fqp2"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "CELSIUS"
+						},
+						{
+							"key": "tiv",
+							"value": "27.3"
+						},
+						{
+							"key": "to",
+							"value": "FAHRENHEIT"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "PathParam Converter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converter/temppp/FAHRENHEIT/81,14/CELSIUS",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converter",
+						"temppp",
+						"FAHRENHEIT",
+						"81,14",
+						"CELSIUS"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "QueryParam Converter",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/tempconv/webapi/converter/tempqp?ti=CELSIUS&tiv=27.3&to=FAHRENHEIT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"tempconv",
+						"webapi",
+						"converter",
+						"tempqp"
+					],
+					"query": [
+						{
+							"key": "ti",
+							"value": "CELSIUS"
+						},
+						{
+							"key": "tiv",
+							"value": "27.3"
+						},
+						{
+							"key": "to",
+							"value": "FAHRENHEIT"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
