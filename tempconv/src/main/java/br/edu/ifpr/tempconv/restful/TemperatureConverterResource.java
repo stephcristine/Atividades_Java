@@ -4,10 +4,13 @@ import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
+import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.QueryParam;
+import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 
 @Path("converter")
+@Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class TemperatureConverterResource {
 	@GET @Path("temppp/{ti}/{tiv:[-+]?\\*d([.,]\\*d+)?}/{to}")
 	public Response temppp(@PathParam("ti") TemperatureTypes ti,
