@@ -12,7 +12,6 @@ import jakarta.ws.rs.core.Response;
 @Path("converterpp")
 public class TemperatureConverterPPResource {
 	@GET @Path("c2fpp/{tempi:[-+]?\\d*([.,]\\d+)?}")
-	
 	public Response c2fpp(@PathParam("tempi") String temperature) {
 		String str = temperature.replace(',','.');
 		

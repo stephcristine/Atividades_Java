@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
 import br.edu.ifpr.tempconv.restful.xml.adapter.LocalDateTimeAdapter;
+import jakarta.ws.rs.FormParam;
 import jakarta.xml.bind.annotation.XmlAccessType;
 import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
@@ -26,21 +27,40 @@ public class Temperature {
 	//Exemplo formatação
 	@JsonProperty("temperatura_entrada")
 	@XmlElement(name="temp_entrada")
+	@FormParam("tempi")
 	private Double tempi;
-	
+		
+	@JsonProperty("tipo_temperatura_entrada")
+	@XmlElement(name="typei")
+	@FormParam("typei")
 	private TemperatureTypes typei;
+	
+	@JsonProperty("Temperatura_saída")
+	@XmlElement(name="temp_saída")
 	private Double tempo;
+	
+	@JsonProperty("tipo_temperatura_saída")
+	@XmlElement(name="typeo")
+	@FormParam("typeo")
 	private TemperatureTypes typeo;
 
-	public Temperature() {}
+	public Temperature() {
+		this.timestamp = LocalDateTime.now();
+	}
 	public Temperature(Double tempi, TemperatureTypes typei,
-			   Double tempo, TemperatureTypes typeo){
+					   Double tempo, TemperatureTypes typeo){
 	this.timestamp = LocalDateTime.now();
 	this.tempi = tempi;
 	this.typei = typei;
 	this.tempo = tempo;
 	this.typeo = typeo;
 	}
+	
+	public void setTimestamp(LocalDateTime timestamp) {
+		this.timestamp = timestamp;
+	}
+	public LocalDateTime getTimestamp() { return timestamp;}
+	
 public String toString(){
 	DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG,
 								      FormatStyle.SHORT);
