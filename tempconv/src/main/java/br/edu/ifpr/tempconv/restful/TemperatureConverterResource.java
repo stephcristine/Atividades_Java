@@ -1,7 +1,9 @@
 package br.edu.ifpr.tempconv.restful;
 
 import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
+import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.GET;
+import jakarta.ws.rs.POST;
 import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
@@ -40,4 +42,9 @@ public class TemperatureConverterResource {
 		// CRIAR O OBJETO Temperature
 		// "MONTAR" / DEVOLVER A RESPOSTA COM O OBJETO Temperature
 	}
+	
+	@POST @Path("tempbp")
+	public Response tempbp(@BeanParam TemperatureTypes type, String temperature){
+		return Response.ok().build();
+		}
 }
