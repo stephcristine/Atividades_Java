@@ -1,4 +1,11 @@
-br\edu\ifpr\tempconv\restful\TemperatureConverterPPResource.class
-br\edu\ifpr\tempconv\model\Temperature.class
+br\edu\ifpr\tempconv\restful\config\AppConfig.class
+br\edu\ifpr\tempconv\restful\TemperatureConverterQPResource.class
+br\edu\ifpr\tempconv\utils\TemperatureConverter$1.class
+br\edu\ifpr\tempconv\utils\TemperatureUtils.class
 br\edu\ifpr\tempconv\model\types\TemperatureTypes.class
+br\edu\ifpr\tempconv\repository\TemperatureRepository.class
+br\edu\ifpr\tempconv\restful\TemperatureConverterResource.class
+br\edu\ifpr\tempconv\restful\TemperatureConverterPPResource.class
+br\edu\ifpr\tempconv\utils\TemperatureConverter.class
+br\edu\ifpr\tempconv\model\Temperature.class
 br\edu\ifpr\tempconv\restful\xml\adapter\LocalDateTimeAdapter.class

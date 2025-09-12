@@ -47,6 +47,7 @@ public class Temperature {
 	public Temperature() {
 		this.timestamp = LocalDateTime.now();
 	}
+	
 	public Temperature(Double tempi, TemperatureTypes typei,
 					   Double tempo, TemperatureTypes typeo){
 	this.timestamp = LocalDateTime.now();
@@ -60,6 +61,27 @@ public class Temperature {
 		this.timestamp = timestamp;
 	}
 	public LocalDateTime getTimestamp() { return timestamp;}
+	
+	public void setTempi(Double tempi) {
+		this.tempi = tempi;
+	}
+	public Double getTempi() {return tempi;}
+	
+	public void setTypei(TemperatureTypes typei) {
+		this.typei = typei;
+	}
+	public TemperatureTypes getTypei() {return typei;}
+	
+	public void setTempo(Double tempo) {
+		this.tempo = tempo;
+	}
+	public Double getTempo() {return tempo;}
+	
+	public void setTypeo(TemperatureTypes typeo) {
+		this.typeo = typeo;
+	}
+	public TemperatureTypes getTypeo() {return typeo;}
+	
 	
 public String toString(){
 	DateTimeFormatter dtf = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.LONG,

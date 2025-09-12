@@ -5,7 +5,9 @@ import java.time.ZoneId;
 
 import br.edu.ifpr.tempconv.model.Temperature;
 import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
+import br.edu.ifpr.tempconv.repository.TemperatureRepository;
 import br.edu.ifpr.tempconv.utils.TemperatureConverter;
+import br.edu.ifpr.tempconv.utils.TemperatureUtils;
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.POST;
@@ -22,16 +24,13 @@ import jakarta.ws.rs.core.UriInfo;
 @Path("converter")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class TemperatureConverterResource {
+	private TemperatureRepository repo = TemperatureRepository.INSTANCE;
+	
 	@GET @Path("temppp/{ti}/{tiv:[-+]?\\*d([.,]\\*d+)?}/{to}")
 	public Response temppp(@PathParam("ti") TemperatureTypes ti,
 						   @PathParam("tiv") String tiv, 
 						   @PathParam("to") TemperatureTypes to) {
 		return processTemperature(ti,tiv,to);
-		// SUBSTITUIR ',' POR '.'
-		// CONVERTER DE STRING PARA DOUBLE
-		// INVOCAR TemperatureConverter.calculateTempOutput
-		// CRIAR O OBJETO Temperature
-		// "MONTAR" / DEVOLVER A RESPOSTA COM O OBJETO Temperature
 	}
 	
 	@GET @Path("tempqp")
@@ -62,9 +61,9 @@ public class TemperatureConverterResource {
 		Temperature temp = new Temperature(t.getTempi(), t.getTypei(),
 										   tempo, t.getTypeo());
 		
-		Long millis = temp.getTimestamp().atZone(ZoneId.systemDefault())
-										 .toInstant()
-										 .toEpochMilli();
+		repo.insert(temp);
+		
+		Long millis = TemperatureUtils.timestampToMillis(t.getTimestamp());
 		
 		UriBuilder builder = uriInfo.getBaseUriBuilder();
 		URI uri = builder.path("temperatures")
@@ -80,7 +79,10 @@ public class TemperatureConverterResource {
 		Double tempi = Double.valueOf(str);
 		Double tempo = TemperatureConverter.calculateTempOutput(ti, tempi, to);
 		
+		Temperature temp = new Temperature(tempi,ti,tempo,to);
 		
-		
+		return Response.ok()
+					   .entity(temp)
+					   .build();
 	}
 }
