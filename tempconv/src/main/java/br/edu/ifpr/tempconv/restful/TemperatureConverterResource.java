@@ -1,7 +1,7 @@
 package br.edu.ifpr.tempconv.restful;
 
 import java.net.URI;
-import java.time.ZoneId;
+//import java.time.ZoneId;
 
 import br.edu.ifpr.tempconv.model.Temperature;
 import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
@@ -26,7 +26,7 @@ import jakarta.ws.rs.core.UriInfo;
 public class TemperatureConverterResource {
 	private TemperatureRepository repo = TemperatureRepository.INSTANCE;
 	
-	@GET @Path("temppp/{ti}/{tiv:[-+]?\\*d([.,]\\*d+)?}/{to}")
+	@GET @Path("temppp/{ti}/{tiv:[-+]?\\d+(?:[.,]\\d+)?}/{to}")
 	public Response temppp(@PathParam("ti") TemperatureTypes ti,
 						   @PathParam("tiv") String tiv, 
 						   @PathParam("to") TemperatureTypes to) {
@@ -37,19 +37,14 @@ public class TemperatureConverterResource {
 	public Response tempqp(@QueryParam("ti") TemperatureTypes ti,
 						   @QueryParam("tiv") String tiv,
 						   @QueryParam("to") TemperatureTypes to) {
-		return Response.ok().build();
-		// SE "tiv" É INVÁLIDO OU NÃO PASSA NA VERIFICAÇÃO
-		// 	DA REGEX
-		// 	ENTÃO RETORNAR 400
-		// FIM-SE
-		//
-		// SUBSTITUIR ',' POR '.'
-		// CONVERTER DE STRING PARA DOUBLE
-		// INVOCAR TemperatureConverter.calculateTempOutput
-		// CRIAR O OBJETO Temperature
-		// "MONTAR" / DEVOLVER A RESPOSTA COM O OBJETO Temperature
 		
-		// return processTemperature(ti,tiv,to);
+		if (tiv == null || !tiv.matches("[-+]?\\d+(?:[.,]\\d+)?")) {
+			return Response.status(Response.Status.BAD_REQUEST)
+                    .entity(tiv)
+                    .build();
+	    }
+		
+		return processTemperature(ti,tiv,to);
 	}
 	
 	@POST @Path("form1")
