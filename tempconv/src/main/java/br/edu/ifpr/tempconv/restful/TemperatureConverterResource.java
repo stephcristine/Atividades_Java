@@ -77,7 +77,7 @@ public class TemperatureConverterResource {
 		Temperature temp = new Temperature(tempi,ti,tempo,to);
 		
 		return Response.ok()
-					   .entity(temp)
+					   .entity(temp.toString())
 					   .build();
 	}
 }
