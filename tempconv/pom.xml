@@ -123,8 +123,13 @@
    		<groupId>org.glassfish.jersey.media</groupId>
    		<artifactId>jersey-media-jaxb</artifactId>
    	  </dependency>
-   	  
-   	</dependencies>
+
+      <dependency>
+      	<groupId>br.edu.ifpr</groupId>
+      	<artifactId>mongodriver</artifactId>
+      	<version>0.0.1-SNAPSHOT</version>
+      </dependency>
+   </dependencies>
 
    <build>
       <finalName>${project.artifactId}</finalName>
