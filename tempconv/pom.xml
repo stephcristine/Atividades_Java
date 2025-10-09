@@ -23,6 +23,8 @@
       <servlet-api.version>6.0.0</servlet-api.version>
 
       <jersey.version>3.1.2</jersey.version>
+      
+      <mongodb.driver.version>4.11.1</mongodb.driver.version>
 
       <jackson.core.version>2.15.2</jackson.core.version>
       <jackson.databind.version>2.15.2</jackson.databind.version>
@@ -125,10 +127,11 @@
    	  </dependency>
 
       <dependency>
-      	<groupId>br.edu.ifpr</groupId>
-      	<artifactId>mongodriver</artifactId>
-      	<version>0.0.1-SNAPSHOT</version>
+         <groupId>org.mongodb</groupId>
+         <artifactId>mongodb-driver-sync</artifactId>
+         <version>${mongodb.driver.version}</version>
       </dependency>
+      
    </dependencies>
 
    <build>

@@ -2,13 +2,13 @@ package br.edu.ifpr.tempconv.restful;
 
 import java.net.URI;
 
-import br.edu.ifpr.mongodriver.model.Driver;
 import br.edu.ifpr.tempconv.model.Temperature;
-import br.edu.ifpr.tempconv.repository.TemperatureRepo;
+import br.edu.ifpr.tempconv.repository.TemperatureMongoRepository;
 import br.edu.ifpr.tempconv.repository.TemperatureRepository;
 import br.edu.ifpr.tempconv.utils.TemperatureConverter;
 import br.edu.ifpr.tempconv.utils.TemperatureUtils;
 import jakarta.ws.rs.BeanParam;
+import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.POST;
 import jakarta.ws.rs.PUT;
 import jakarta.ws.rs.Path;
@@ -23,11 +23,11 @@ import jakarta.ws.rs.core.UriInfo;
 @Path("Temperatures")
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class TemperatureResource {
-	private TemperatureRepo repo = TemperatureRepo.INSTANCE;
+	private TemperatureMongoRepository repo = TemperatureMongoRepository.INSTANCE;
 	
 	public TemperatureResource() {}
 	
-	@POST @Path("form1")
+	@POST @Path("create")
 	public Response FormParam(@Context UriInfo uriInfo,
 							  @BeanParam Temperature t) {
 		Double tempo = TemperatureConverter.calculateTempOutput(t.getTypei(),
@@ -48,19 +48,4 @@ public class TemperatureResource {
 		return Response.created(uri).build();
 	}
 	
-	@PUT @Path("{timestamp}")
-	   public Response update(@PathParam("timestamp") String timestamp,
-	                          @QueryParam Tempi tempi) {
-	   		tempi.setTimestamp(timestamp);
-
-	      boolean updated = repo.update(tempi);
-	      String  json    = """
-	                        {
-	                           "timestamp": %s,
-	                           "updated": %b
-	                        }
-	                        """.formatted(timestamp,updated);
-	   
-	      return Response.ok(json).build();
-	   }
 }
