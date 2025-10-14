@@ -169,6 +169,17 @@
                <artifactId>maven-deploy-plugin</artifactId>
                <version>${maven.deploy.plugin.version}</version>
             </plugin>
+            
+            <plugin>
+      			<groupId>org.eclipse.jetty</groupId>
+      			<artifactId>jetty-maven-plugin</artifactId>
+      			<version>11.0.20</version>
+      			<configuration>
+        			<httpPort>8080</httpPort>
+        			<contextPath>/tempconv</contextPath>
+      			</configuration>
+    		</plugin>
+
          </plugins>
       </pluginManagement>
    </build>
