@@ -16,12 +16,13 @@ import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Updates;
 
 import br.edu.ifpr.tempconv.model.Temperature;
+import br.edu.ifpr.tempconv.utils.TemperatureConverter;
 import br.edu.ifpr.tempconv.utils.TemperatureUtils;
 
 public enum TemperatureMongoRepository {
 	INSTANCE;
 	
-	private final String MONGODB_CONN = "mongodb://localhost:28017";
+	private final String MONGODB_CONN = "mongodb://localhost:27017";
 	private final String TEMP_DB      = "temperature_db";
 	private final String TEMP_COLL    = "temperatures";
 
@@ -35,37 +36,45 @@ public enum TemperatureMongoRepository {
 	   coll        = database.getCollection(TEMP_COLL);
 	}
 
-	public boolean insert(Temperature temperature) {
-		
-		Long millis = TemperatureUtils.timestampToMillis(temperature.getTimestamp());
-	    
+	public Document insert(Temperature temperature) {
+	    Long millis = TemperatureUtils.timestampToMillis(temperature.getTimestamp());
 	    String id = TemperatureUtils.timestampToString(millis);
 
 	    Document doc = new Document("_id", id)
-	                        .append("timestamp", temperature.getTimestamp().toString())
 	                        .append("tempi", temperature.getTempi())
 	                        .append("typei", temperature.getTypei().toString())
 	                        .append("tempo", temperature.getTempo())
 	                        .append("typeo", temperature.getTypeo().toString());
 
-	    return coll.insertOne(doc).getInsertedId() != null;
+	    coll.insertOne(doc);
+	    return doc;
 	}
 	
-	public boolean update(Temperature temperature) {
-		  Long millis = TemperatureUtils.timestampToMillis(temperature.getTimestamp());
+	public Optional<Document> update(String id, Temperature temperature) {
+	    Bson filter = Filters.eq("_id", id);
 	    
-	      String id = TemperatureUtils.timestampToString(millis);
+	    double tempo = TemperatureConverter.calculateTempOutput(
+	            temperature.getTypei(),
+	            temperature.getTempi(),
+	            temperature.getTypeo()
+	        );
+	    
+	    Bson updates = Updates.combine(
+	        Updates.set("tempi", temperature.getTempi()),
+	        Updates.set("typei", temperature.getTypei().toString()),
+	        Updates.set("tempo", tempo),
+	        Updates.set("typeo", temperature.getTypeo().toString())
+	    );	
 
-	      Bson filter           = Filters.eq("_id", id);
-	      Bson updateOneUpdates = Updates.combine(
-	                                     Updates.set("timestamp",temperature.getTimestamp().toString()),
-	                                     Updates.set("tempi",temperature.getTempi()),
-	                                     Updates.set("typei",temperature.getTypei().toString()),
-	                                     Updates.set("tempo",temperature.getTempo()),
-	    		  						 Updates.set("typeo",temperature.getTypeo().toString()));
+	    long modifiedCount = coll.updateOne(filter, updates).getModifiedCount();
 
-	      return (coll.updateOne(filter,updateOneUpdates)).getModifiedCount() > 0L;
-	   }
+	    if (modifiedCount > 0) {
+	        Document updatedDoc = coll.find(filter).first();
+	        return Optional.ofNullable(updatedDoc);
+	    } else {
+	        return Optional.empty();
+	    }
+	}
 
 	public boolean delete(Temperature temperature) {
 		Long millis = TemperatureUtils.timestampToMillis(temperature.getTimestamp());
@@ -87,25 +96,15 @@ public enum TemperatureMongoRepository {
 	      return (int) deleted;
 	   }
 	
-	public List<Temperature> findAll() {
-	    List<Temperature> temperatures = new ArrayList<>();
-	    FindIterable<Document> docs = coll.find();
-
-	    for (Document doc : docs) {
-	        temperatures.add(TemperatureUtils.fromDocument(doc));
-	    }
-
-	    return temperatures;
+	public List<Document> findAll() {
+	    List<Document> docs = new ArrayList<>();
+	    coll.find().forEach(docs::add);
+	    return docs;
 	}
 
-	public Optional<Temperature> findById(String id) {
+	public Document findById(String id) {
 	    Bson filter = Filters.eq("_id", id);
-	    Document doc = coll.find(filter).first();
-
-	    if (doc != null)
-	        return Optional.of(TemperatureUtils.fromDocument(doc));
-
-	    return Optional.empty();
+	    return coll.find(filter).first();
 	}
 
 }

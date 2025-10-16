@@ -2,6 +2,7 @@ package br.edu.ifpr.tempconv.utils;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 import org.bson.Document;
 
@@ -19,9 +20,6 @@ public final class TemperatureUtils {
 	
 	public static Temperature fromDocument(Document doc) {
         Temperature temperature = new Temperature();
-
-        String timestampStr = doc.getString("timestamp");
-        temperature.setTimestamp(LocalDateTime.parse(timestampStr));
 
         temperature.setTempi(doc.getDouble("tempi"));
         temperature.setTempo(doc.getDouble("tempo"));

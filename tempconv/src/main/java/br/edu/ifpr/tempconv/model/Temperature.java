@@ -5,7 +5,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import br.edu.ifpr.tempconv.model.types.TemperatureTypes;
 import br.edu.ifpr.tempconv.restful.xml.adapter.LocalDateTimeAdapter;
@@ -19,12 +21,14 @@ import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 @XmlRootElement
 @XmlType(propOrder= {"timestamp","typei","tempi","typeo","tempo"})
+@JsonPropertyOrder({"timestamp","typei","tempi","typeo","tempo"})
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Temperature {
+	
 	@XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+	@JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss")
 	private LocalDateTime timestamp;
 	
-	//Exemplo formatação
 	@JsonProperty("temperatura_entrada")
 	@XmlElement(name="temp_entrada")
 	@FormParam("tempi")

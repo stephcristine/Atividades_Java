@@ -43,6 +43,7 @@ public final class TemperatureConverter {
 						result = celsius2Kelvin(tiv);
 						break;
 				}
+				break;
 			case FAHRENHEIT:
 				switch (to) {
 					case CELSIUS:
@@ -55,6 +56,7 @@ public final class TemperatureConverter {
 						result = fahrenheit2Kelvin(tiv);
 						break;
 				}
+				break;
 			case KELVIN:
 				switch (to) {
 					case CELSIUS:
@@ -67,6 +69,7 @@ public final class TemperatureConverter {
 						result = tiv;
 						break;
 				}
+				break;
 		}
 		return result;
 	}

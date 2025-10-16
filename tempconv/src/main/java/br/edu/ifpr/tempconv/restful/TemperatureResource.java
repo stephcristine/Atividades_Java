@@ -4,6 +4,8 @@ import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 
+import org.bson.Document;
+
 import br.edu.ifpr.tempconv.model.Temperature;
 import br.edu.ifpr.tempconv.repository.TemperatureMongoRepository;
 import br.edu.ifpr.tempconv.utils.TemperatureConverter;
@@ -47,32 +49,36 @@ public class TemperatureResource {
                 t.getTypeo()
         );
 
-        repo.insert(temp);
-
-        Long millis = TemperatureUtils.timestampToMillis(temp.getTimestamp());
-        String id = TemperatureUtils.timestampToString(millis);
+        Document doc = repo.insert(temp);
 
         UriBuilder builder = uriInfo.getBaseUriBuilder();
         URI uri = builder.path("temperatures")
-                         .path(id)
+                         .path(doc.getString("_id"))
                          .build();
 
-        return Response.created(uri).build();
+        return Response.created(uri).entity(doc.toJson()).type(MediaType.APPLICATION_JSON).build();
     }
 
     @PUT
     @Path("{_id}")
     public Response update(@PathParam("_id") String id, @BeanParam Temperature temperature) {
+        Optional<Document> updatedDoc = repo.update(id, temperature);
 
-        boolean updated = repo.update(temperature);
+        if (updatedDoc.isPresent()) {
+            return Response.ok(updatedDoc.get().toJson(), MediaType.APPLICATION_JSON).build();
+        }
+
         String json = """
                       {
                          "_id": "%s",
-                         "updated": %b
+                         "updated": false
                       }
-                      """.formatted(id, updated);
+                      """.formatted(id);
 
-        return Response.ok(json).build();
+        return Response.status(Status.NOT_FOUND)
+                       .entity(json)
+                       .type(MediaType.APPLICATION_JSON)
+                       .build();
     }
 
     @DELETE
@@ -92,30 +98,34 @@ public class TemperatureResource {
     public Response delete(@PathParam("_id") String id) {
         boolean deleted = repo.delete(id);
         String json = """
-                      {
-                         "deleted": %b
-                      }
-                      """.formatted(deleted);
+                {
+                   "_id": "%s",
+                   "deleted": %b
+                }
+                """.formatted(id, deleted);
 
-        return Response.ok(json).build();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
 
     @GET
-    public Response getTemperatures() {
-        List<Temperature> temperatures = repo.findAll();
-        GenericEntity<List<Temperature>> entity =
-                new GenericEntity<List<Temperature>>(temperatures) {};
-
-        return Response.ok(entity).build();
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getAll() {
+        List<Document> docs = repo.findAll();
+        String json = docs.stream()
+                          .map(Document::toJson)
+                          .toList()
+                          .toString();
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
 
     @GET
     @Path("{_id}")
+    @Produces(MediaType.APPLICATION_JSON)
     public Response getTemperatureById(@PathParam("_id") String id) {
-        Optional<Temperature> temperature = repo.findById(id);
+        Document doc = repo.findById(id);
 
-        if (temperature.isPresent())
-            return Response.ok(temperature.get()).build();
+        if (doc != null)
+            return Response.ok(doc.toJson(), MediaType.APPLICATION_JSON).build();
 
         String json = """
                       {
@@ -123,7 +133,6 @@ public class TemperatureResource {
                          "found": false
                       }
                       """.formatted(id);
-
         return Response.status(Status.NOT_FOUND)
                        .entity(json)
                        .build();
