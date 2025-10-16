@@ -106,5 +106,29 @@ public enum TemperatureMongoRepository {
 	    Bson filter = Filters.eq("_id", id);
 	    return coll.find(filter).first();
 	}
+	
+	public List<Document> findByTypei(String typei) {
+	    List<Document> temperatures = new ArrayList<>();
+
+	    FindIterable<Document> docs = coll.find(Filters.eq("typei", typei));
+
+	    for (Document doc : docs) {
+	        temperatures.add(doc);
+	    }
+
+	    return temperatures;
+	}
+	
+	public List<Document> findByTypeo(String typeo) {
+	    List<Document> temperatures = new ArrayList<>();
+
+	    FindIterable<Document> docs = coll.find(Filters.eq("typeo", typeo));
+
+	    for (Document doc : docs) {
+	        temperatures.add(doc);
+	    }
+
+	    return temperatures;
+	}
 
 }

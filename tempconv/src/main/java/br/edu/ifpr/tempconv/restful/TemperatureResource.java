@@ -9,7 +9,6 @@ import org.bson.Document;
 import br.edu.ifpr.tempconv.model.Temperature;
 import br.edu.ifpr.tempconv.repository.TemperatureMongoRepository;
 import br.edu.ifpr.tempconv.utils.TemperatureConverter;
-import br.edu.ifpr.tempconv.utils.TemperatureUtils;
 import jakarta.ws.rs.BeanParam;
 import jakarta.ws.rs.DELETE;
 import jakarta.ws.rs.GET;
@@ -19,7 +18,6 @@ import jakarta.ws.rs.Path;
 import jakarta.ws.rs.PathParam;
 import jakarta.ws.rs.Produces;
 import jakarta.ws.rs.core.Context;
-import jakarta.ws.rs.core.GenericEntity;
 import jakarta.ws.rs.core.MediaType;
 import jakarta.ws.rs.core.Response;
 import jakarta.ws.rs.core.UriBuilder;
@@ -136,5 +134,57 @@ public class TemperatureResource {
         return Response.status(Status.NOT_FOUND)
                        .entity(json)
                        .build();
+    }
+    
+    @GET
+    @Path("/typei/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByTypei(@PathParam("type") String type) {
+        List<Document> docs = repo.findByTypei(type);
+
+        if (docs.isEmpty()) {
+            String json = """
+                {
+                    "message": "Nenhum registro encontrado para o tipo: %s"
+                }
+            """.formatted(type);
+            return Response.status(Response.Status.NOT_FOUND)
+                           .entity(json)
+                           .type(MediaType.APPLICATION_JSON)
+                           .build();
+        }
+
+        String json = docs.stream()
+                          .map(Document::toJson)
+                          .toList()
+                          .toString();
+
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
+    }
+    
+    @GET
+    @Path("/typeo/{type}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getByTypeo(@PathParam("type") String type) {
+        List<Document> docs = repo.findByTypeo(type);
+
+        if (docs.isEmpty()) {
+            String json = """
+                {
+                    "message": "Nenhum registro encontrado para o tipo: %s"
+                }
+            """.formatted(type);
+            return Response.status(Response.Status.NOT_FOUND)
+                           .entity(json)
+                           .type(MediaType.APPLICATION_JSON)
+                           .build();
+        }
+
+        String json = docs.stream()
+                          .map(Document::toJson)
+                          .toList()
+                          .toString();
+
+        return Response.ok(json, MediaType.APPLICATION_JSON).build();
     }
 }
